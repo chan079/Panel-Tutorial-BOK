@@ -501,7 +501,7 @@ twoway (scatter satis mon1 if !trgrp) ///
 ### 연습 2.58 앞
 
 ```stata
-use $datadir/https://friosavila.github.io/playingwithstata/drdid/mpdta.dta, clear
+use https://friosavila.github.io/playingwithstata/drdid/mpdta.dta, clear
 table year first
 xtset county year
 gen d = treat & year >= first_treat
