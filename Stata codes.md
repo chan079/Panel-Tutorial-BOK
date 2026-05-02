@@ -2,7 +2,8 @@
 명령함(마지막 `testfe`를 적절한 파일로 바꿈)
 
 ```stata
-use https://github.com/chan079/panelbook/raw/main/data/testfe, clear
+global datadir "https://github.com/chan079/panelbook/raw/main/data"
+use $datadir/testfe, clear
 ```
 
 # 1. 도입
@@ -15,7 +16,7 @@ use https://github.com/chan079/panelbook/raw/main/data/testfe, clear
 set more off
 cd "c:/Documents/Data Folder"
 log close _all
-log using "Tutorial-MyName.smcl", replace
+log using ex.smcl, replace
 *** Work here ***
 log close
 set more on
