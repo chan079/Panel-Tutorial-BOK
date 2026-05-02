@@ -16,7 +16,7 @@ use $datadir/testfe, clear
 set more off
 cd "c:/Documents/Data Folder"
 log close _all
-log using ex.smcl, replace
+log using mylog.smcl, replace
 *** Work here ***
 log close
 set more on
