@@ -2,7 +2,7 @@
 명령함(마지막 `testfe`를 적절한 파일로 바꿈)
 
 ```stata
-global datadir "https://github.com/chan079/panelbook/raw/main/data"
+global datadir "https://github.com/chan079/Panel-Tutorial-BOK/raw/main/data"
 use $datadir/testfe, clear
 ```
 
@@ -27,7 +27,7 @@ set more on
 ### 연습 1.8
 
 ```stata
-use death1, clear
+use $datadir/death1, clear
 reg deathrate smoke if year==2010
 ```
 
@@ -51,7 +51,7 @@ reg deathrate smoke aged i.year, vce(cl region)
 ### 연습 1.12
 
 ```stata
-use hprice1, clear
+use $datadir/hprice1, clear
 reg lprice bdrms colonial
 reg lprice bdrms colonial lsqrft
 ```
@@ -66,7 +66,7 @@ reg lprice bdrms colonial lbdrmsize
 ### 연습 1.14
 
 ```stata
-use mlb1, clear
+use $datadir/mlb1, clear
 reg lsalary years gamesyr bavg hrunsyr rbisyr
 su years gamesyr bavg hrunsyr rbisyr
 ```
@@ -74,7 +74,7 @@ su years gamesyr bavg hrunsyr rbisyr
 ### 연습 1.15
 
 ```stata
-use wage2, clear
+use $datadir/wage2, clear
 reg lwage educ exper tenure married black south urban
 ```
 
@@ -102,14 +102,14 @@ reg lwage educ exper tenure married black south urban IQ KWW
 ### 연습 1.19 앞
 
 ```stata
-use wage2, clear
+use $datadir/wage2, clear
 reg hours lwage age married black
 ```
 
 ### 연습 1.21 앞
 
 ```stata
-use death1, clear
+use $datadir/death1, clear
 reg deathrate drink smoke aged
 reg deathrate drink smoke aged, vce(r)
 reg deathrate drink smoke aged, vce(cl region)
@@ -118,7 +118,7 @@ reg deathrate drink smoke aged, vce(cl region)
 ### 연습 1.23
 
 ```stata
-use death1, clear
+use $datadir/death1, clear
 reg deathrate drink smoke aged i.year
 reg deathrate drink smoke aged i.year, vce(r)
 reg deathrate drink smoke aged i.year, vce(cl region)
@@ -130,7 +130,7 @@ reg deathrate drink smoke aged i.year, vce(cl region)
 직접 입력하면 오류가 발생하므로 이를 제외하고 복사.
 
 ```stata
-import excel using munnell90.xls, firstrow clear
+import excel using $datadir/munnell90.xls, firstrow clear
 xtset ... // HERE
 
 label var st_abb "state abbreviation"
@@ -163,7 +163,7 @@ save munnell90, replace
 ### 연습 2.2 앞
 
 ```stata
-use gasoline, clear
+use $datadir/gasoline, clear
 xtset country year
 d
 xtreg lgaspcar lincomep lrpmg lcarpcap, be
@@ -172,7 +172,7 @@ xtreg lgaspcar lincomep lrpmg lcarpcap, be
 ### 연습 2.4
 
 ```stata
-use wdi5bal, clear
+use $datadir/wdi5bal, clear
 xtreg sav age0_19 age20_29 age65over lifeexp i.year, be
 xtdescribe
 use wdi5data, clear
@@ -183,7 +183,7 @@ xtdescribe
 ### 연습 2.6 앞
 
 ```stata
-use gasoline, clear
+use $datadir/gasoline, clear
 reg lgaspcar lincomep lrpmg lcarpcap i.year
 ```
 
@@ -196,14 +196,14 @@ reg lgaspcar lincomep lrpmg lcarpcap, vce(cl country)
 ### 연습 2.8 앞
 
 ```stata
-use gasoline, clear
+use $datadir/gasoline, clear
 xtreg lgaspcar lincomep lrpmg lcarpcap i.year, fe
 ```
 
 ### 연습 2.13 앞
 
 ```stata
-use gasoline, clear
+use $datadir/gasoline, clear
 foreach v of varlist lincomep lrpmg lcarpcap {
   by country: egen bar_`v' = mean(`v')
 }
@@ -222,7 +222,7 @@ est tab ols re fe be, b se
 
 ```stata
 clear all
-use small-dataset, clear
+use $datadir/small-dataset, clear
 xtset id year
 list, sep(4)
 xtreg y x z, fe
@@ -248,14 +248,14 @@ reg y x z x_* z_*
 ### 연습 2.17 앞
 
 ```stata
-use gasoline, clear
+use $datadir/gasoline, clear
 xtreg lgaspcar lincomep lrpmg lcarpcap i.year, re
 ```
 
 ### 연습 2.23
 
 ```stata
-use death1, clear
+use $datadir/death1, clear
 foreach v of varlist deathrate smoke aged {
   gen ln`v' = ln(`v')
 }
@@ -274,7 +274,7 @@ xtreg lndeathrate lnsmoke lnaged i.year, fe vce(r)
 ### 연습 2.25
 
 ```stata
-use death1, clear
+use $datadir/death1, clear
 drop if year==2008
 reg d.(deathrate smoke aged), nocons
 reg d.(deathrate smoke aged)
@@ -292,7 +292,7 @@ reg d.(deathrate smoke aged) i.year
 ### 연습 2.27 앞
 
 ```stata
-use gasoline, clear
+use $datadir/gasoline, clear
 xtreg lgaspcar lincomep lrpmg lcarpcap i.year, fe
 areg lgaspcar lincomep lrpmg lcarpcap i.year, a(country)
 ```
@@ -300,7 +300,7 @@ areg lgaspcar lincomep lrpmg lcarpcap i.year, a(country)
 ### 연습 2.29 앞
 
 ```stata
-use testfe, clear
+use $datadir/testfe, clear
 xtreg y x1 x2, fe
 est store fe
 xtreg y x1 x2 z1, re
@@ -310,7 +310,7 @@ hausman fe .
 ### 연습 2.30
 
 ```stata
-use hausman-odd, clear
+use $datadir/hausman-odd, clear
 xtreg y x1 x2, fe
 est store fe
 xtreg y x1 x2 z1, re
@@ -320,7 +320,7 @@ hausman fe .
 ### 연습 2.31
 
 ```stata
-use testfe, clear
+use $datadir/testfe, clear
 xtreg y x1 x2, fe vce(r)
 est store fe
 xtreg y x1 x2, re vce(r)
@@ -331,7 +331,7 @@ hausman fe re
 ### 연습 2.32
 
 ```stata
-use testfe, clear
+use $datadir/testfe, clear
 foreach v of varlist x1 x2 {
   by id: egen bar_`v' = mean(`v')
 }
@@ -352,7 +352,7 @@ xtreg y x1 x2 z1, be
 ### 연습 2.37
 
 ```stata
-use munnell90, clear
+use $datadir/munnell90, clear
 global model lngsp lnhwy lnwater lnutil lnpc lnemp unemp
 reg $model i.yr
 reg $model i.yr, vce(r)
@@ -386,7 +386,7 @@ testparm *_bar
 ### 연습 2.38
 
 ```stata
-use ict, clear
+use $datadir/ict, clear
 gen lsales = ln(sales)
 gen lemp = ln(emp)
 gen lcap = ln(cap)
@@ -422,7 +422,7 @@ testparm *_bar
 다음에서는 `local` 매크로를 사용하므로 `do` 파일에서만 작동. 명령창에서 복사/붙여넣기로 사용하려면 매크로를 `local` 대신에 `global`로 정의하고 `$model`과 같이 사용.
 
 ```stata
-use gasoline, clear
+use $datadir/gasoline, clear
 local model "lgaspcar lincomep lrpmg lcarpcap"
 reg `model'
 xtreg `model', pa c(ind)
@@ -435,7 +435,7 @@ xtreg `model', pa c(exc)
 ### 연습 2.44 앞
 
 ```stata
-use gasoline, clear
+use $datadir/gasoline, clear
 local model "lgaspcar lincomep lrpmg lcarpcap"
 qui xtreg `model', be
 est store be
@@ -451,7 +451,7 @@ est tab fe pols re be, b se stats(r2 r2_w r2_o r2_b)
 ### 2.5.2절 시작 부분
 
 ```stata
-use didex, clear
+use $datadir/didex, clear
 xtreg y d, fe vce(r)
 xtreg y d i.year, fe vce(r)
 ```
@@ -459,14 +459,14 @@ xtreg y d i.year, fe vce(r)
 ### 연습 2.49 앞 (2.5.2절 두 번째 부분)
 
 ```stata
-use didex, clear
+use $datadir/didex, clear
 reg y part##after, vce(cl id)
 ```
 
 ### 연습 2.51
 
 ```stata
-use didexunb, clear
+use $datadir/didexunb, clear
 xtdes
 xtreg y d i.year, fe
 ```
@@ -501,7 +501,7 @@ twoway (scatter satis mon1 if !trgrp) ///
 ### 연습 2.58 앞
 
 ```stata
-use https://friosavila.github.io/playingwithstata/drdid/mpdta.dta, clear
+use $datadir/https://friosavila.github.io/playingwithstata/drdid/mpdta.dta, clear
 table year first
 xtset county year
 gen d = treat & year >= first_treat
@@ -518,7 +518,7 @@ estat aggreg, dynamic
 직접 명령창에 입력하려면 `///` 없이 한 줄에 입력해야 한다.
 
 ```stata
-use psidextract, clear
+use $datadir/psidextract, clear
 xthtaylor lwage wks south smsa ms exp exp2 occ ind union fem blk ed, ///
    endog(exp exp2 occ ind union ed)
 ```
@@ -532,7 +532,7 @@ xthtaylor lwage wks south smsa ms exp exp2 occ ind union fem blk ed, ///
 ### 연습 4.4 다음, 연습 4.5 앞
 
 ```stata
-use ajry08five, clear
+use $datadir/ajry08five, clear
 xtabond dem yr3-yr11 if sample==1, pre(inc_1) vce(r) nocons
 ```
 
@@ -541,7 +541,7 @@ xtabond dem yr3-yr11 if sample==1, pre(inc_1) vce(r) nocons
 ### 연습 4.7 앞
 
 ```stata
-use ajry08five, clear
+use $datadir/ajry08five, clear
 qui xtabond dem yr3-yr11 if sample==1, pre(inc_1) nocons two
 estat sargan
 ```
@@ -549,7 +549,7 @@ estat sargan
 ### 연습 4.8 앞
 
 ```stata
-use ajry08five, clear
+use $datadir/ajry08five, clear
 qui xtabond dem yr3-yr11 if sample==1, pre(inc_1) nocons two
 estat abond
 ```
@@ -580,7 +580,7 @@ set more on
 ### 4.3.2절 (연습 4.16 앞)
 
 ```stata
-use unitroot, clear
+use $datadir/unitroot, clear
 xtabond y
 xtdpdsys y
 ```
@@ -588,14 +588,14 @@ xtdpdsys y
 ### 연습 4.18 앞
 
 ```stata
-use ajry08five, clear
+use $datadir/ajry08five, clear
 xtdpdsys dem yr3-yr11 if sample==1, pre(inc_1) vce(r) nocons
 ```
 
 ### 연습 4.21
 
 ```stata
-use growth, clear
+use $datadir/growth, clear
 gen y = ln(gdp)
 gen s = ln(saving)
 gen n = ln(pop)
@@ -615,7 +615,7 @@ estat sargan
 ### 연습 4.22
 
 ```stata
-use growth, clear
+use $datadir/growth, clear
 gen y = ln(gdp)
 gen s = ln(saving)
 gen n = ln(pop)
@@ -636,7 +636,7 @@ xtdpdsys y n yr3-yr26, pre(s) vce(r)
 ### 연습 4.24
 
 ```stata
-use growth-ex, clear
+use $datadir/growth-ex, clear
 by id: egen lny0 = total(lny / (year==0)), missing
 ```
 
@@ -645,7 +645,7 @@ by id: egen lny0 = total(lny / (year==0)), missing
 ### 연습 4.25
 
 ```stata
-use growth-ex, clear
+use $datadir/growth-ex, clear
 by id: egen lny0 = total(lny / (year==0)), missing
 forvalue k = 1/10 {
   by id: egen x1_`k' = total(x1 / (year==`k')), missing
@@ -658,7 +658,7 @@ xtreg lny x1 lny1 x1_1-x1_10 lny0, mle
 ### 연습 4.26
 
 ```stata
-use growth-ex, clear
+use $datadir/growth-ex, clear
 qui tab year, gen(yr)
 xtdpdsys lny x1 yr3-yr11, pre(x2) endo(x3) two vce(r)
 ```
@@ -666,7 +666,7 @@ xtdpdsys lny x1 yr3-yr11, pre(x2) endo(x3) two vce(r)
 ### 연습 4.27
 
 ```stata
-use growth-ex, clear
+use $datadir/growth-ex, clear
 qui tab year, gen(yr)
 xtdpdsys lny x1 yr2-yr11, pre(x2) endo(x3) two vce(r)
 xtdpdsys lny x1 yr4-yr11, pre(x2) endo(x3) two vce(r)
@@ -675,7 +675,7 @@ xtdpdsys lny x1 yr4-yr11, pre(x2) endo(x3) two vce(r)
 ### 연습 4.29
 
 ```stata
-use growth-ex, clear
+use $datadir/growth-ex, clear
 qui tab year, gen(yr)
 xtabond lny x1 yr3-yr11, pre(x2) endo(x3) vce(r)
 xtdpd l(0/1).lny x1 x2 x3 yr3-yr11, dgmm(x2, lag(1 .)) dgmm(lny x3) ///
@@ -685,7 +685,7 @@ xtdpd l(0/1).lny x1 x2 x3 yr3-yr11, dgmm(x2, lag(1 .)) dgmm(lny x3) ///
 ### 연습 4.30
 
 ```stata
-use growth-ex, clear
+use $datadir/growth-ex, clear
 qui tab year, gen(yr)
 xtdpdsys lny x1 yr3-yr11, pre(x2) endo(x3) vce(r)
 xtdpd l(0/1).lny x1 x2 x3 yr3-yr11, dgmm(x2, lag(1 .)) dgmm(lny x3) ///
@@ -695,7 +695,7 @@ xtdpd l(0/1).lny x1 x2 x3 yr3-yr11, dgmm(x2, lag(1 .)) dgmm(lny x3) ///
 ### 연습 4.31
 
 ```stata
-use growth-ex, clear
+use $datadir/growth-ex, clear
 qui tab year, gen(yr)
 xtdpdsys lny x1 yr3-yr11, pre(x2) endo(x3) two vce(r)
 xtdpd growth l.lny x1 x2 x3 yr3-yr11, dgmm(x2, lag(1 .)) dgmm(lny x3) ///
@@ -705,7 +705,7 @@ xtdpd growth l.lny x1 x2 x3 yr3-yr11, dgmm(x2, lag(1 .)) dgmm(lny x3) ///
 ### 연습 4.32
 
 ```stata
-use growth-ex, clear
+use $datadir/growth-ex, clear
 qui tab year, gen(yr)
 xtabond lny x1 yr3-yr11, pre(x2) endo(x3) vce(r)
 xtabond2 l(0/1).lny x1 x2 x3 yr3-yr11, gmm(x2 l.(lny x3)) ///
@@ -715,7 +715,7 @@ xtabond2 l(0/1).lny x1 x2 x3 yr3-yr11, gmm(x2 l.(lny x3)) ///
 ### 연습 4.33
 
 ```stata
-use growth-ex, clear
+use $datadir/growth-ex, clear
 qui tab year, gen(yr)
 xtdpdsys lny x1 yr3-yr11, pre(x2) endo(x3) vce(r)
 xtabond2 l(0/1).lny x1 x2 x3 yr3-yr11, gmm(x2 l.(lny x3)) ///
@@ -725,7 +725,7 @@ xtabond2 l(0/1).lny x1 x2 x3 yr3-yr11, gmm(x2 l.(lny x3)) ///
 ### 연습 4.34
 
 ```stata
-use growth-ex, clear
+use $datadir/growth-ex, clear
 qui tab year, gen(yr)
 xtabond2 growth l.lny x1 x2 x3 yr3-yr11, gmm(x2 l.(lny x3)) ///
    iv(x1 yr3-yr11, eq(d)) h(2) r two
@@ -738,7 +738,7 @@ xtabond2 growth l.lny x1 x2 x3 yr3-yr11, gmm(x2 l.(lny x3)) ///
 ### 연습 5.1
 
 ```stata
-use union, clear
+use $datadir/union, clear
 global model "union age grade not_smsa south black i.year"
 reg ${model}, vce(cl idcode)
 xtreg ${model}, pa corr(ind) vce(r)
@@ -749,7 +749,7 @@ xtreg ${model}, pa corr(exc) vce(r)
 ### 연습 5.2
 
 ```stata
-use union, clear
+use $datadir/union, clear
 global model "union age grade not_smsa south black i.year"
 probit ${model}, vce(cl idcode)
 xtprobit ${model}, pa corr(ind) vce(r)
@@ -762,7 +762,7 @@ xtprobit ${model}, pa corr(exc)
 ### 연습 6.1
 
 ```stata
-use lfp, clear
+use $datadir/lfp, clear
 d
 xtset id period
 xtsum lfp kids lhinc educ black age agesq
@@ -802,7 +802,7 @@ xtprobit lfp kids lhinc ${z} i.period, re
 ### 연습 6.5
 
 ```stata
-use union, clear
+use $datadir/union, clear
 xtsum
 global model "union age grade not_smsa south black i.year"
 xtprobit ${model}, re
@@ -831,7 +831,7 @@ xtprobit ${model} *_bar not_smsa_*, re
 ### 연습 6.6
 
 ```stata
-use lfp, clear
+use $datadir/lfp, clear
 xtset id period
 global z "educ black age agesq"
 
@@ -843,7 +843,7 @@ xtprobit lfp kids lhinc kidsbar lhincbar ${z} i.period, re
 ### 연습 6.7
 
 ```stata
-use vv98, clear
+use $datadir/vv98, clear
 forv yr = 1981/1987 {
   by nr: egen mar_`yr' = total(mar / (year==`yr')), missing
 }
@@ -855,7 +855,7 @@ xtprobit union mar l.union mar_* union80 school black i.year, re
 ### 연습 6.8
 
 ```stata
-use lfp, clear
+use $datadir/lfp, clear
 xtset id period
 
 forv t = 2/5 {
@@ -872,7 +872,7 @@ xtprobit lfp l.lfp kids lhinc educ black age agesq lfp1 kids_* lhinc_* i.period,
 ### 연습 6.9
 
 ```stata
-use union, clear
+use $datadir/union, clear
 foreach v of varlist age grade not_smsa south {
   by id: egen `v'_bar = mean(`v')
 }
