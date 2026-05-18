@@ -1,6 +1,6 @@
 # 한국은행 연수
 
-데이터는 [data](data) 디렉토리에 있는데, 그냥 이 repo 전체를 clone (또는 zip 파일로 다운로드)하면 간편할 것임(상단의 초록색 `<> Code` 버튼을 누르세요).
+데이터는 [data](data) 디렉토리에 있는데, 그냥 이 repo 전체를 받으면 간편할 것임(상단의 초록색 `<> Code` 버튼을 누르세요).
 
 Stata 코드는 <s>[Stata codes.md](Stata%20codes.md) 파일을 참조</s> [강의 슬라이드][slides]에 있음.
 
